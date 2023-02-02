@@ -11,68 +11,101 @@
 
 int main()
 {
-    // declare `letters` to count number of letters given by user
-    // declare `input_string` to hold the three letters given by user
+    // Declare `letters` to count number of letters given by user.
     int letters = 0;
-    char input_string[3];
+    // Declare `input_letters` to hold the three letters given by user.
+    char input_letters[3];
 
-    // prompt user for input
+    // Prompt the user for input.
     // USE THIS COUT STATEMENT IN YOUR CODE. DO NOT CHANGE IT!
     std::cout << "Enter any three letters from the alphabet in any order." << std::endl;
     
-    // begin input loop
-    // terminate once 3 letters have been given
+    // Begin input loop.
+    // Terminate once 3 letters have been given.
     while (letters < 3)
     {
-        // retrieve an input line from the user
+        // Retrieve an input line from the user.
         std::string input_line;
         std::getline(std::cin, input_line, '\n');
 
-        // iterate over input line to check if each character is a letter
+        // Iterate over input line to check if each character is a letter.
         for (int i = 0; i < input_line.length(); ++i)
         {
             bool is_lowercase = 'a' <= input_line[i] && input_line[i] <= 'z';
             bool is_uppercase = 'A' <= input_line[i] && input_line[i] <= 'Z';
 
-            // if character is a letter, add to `input_string` and increment `letters`
+            // If character is a letter, add to `input_letters` and increment `letters`.
             if ((is_lowercase || is_uppercase) && letters < 3)
             {
-                input_string[letters] = input_line[i];
+                input_letters[letters] = input_line[i];
                 ++letters;
             }
-            // behaviour for more than 3 characters is not specified, so throw error
+            // Behaviour for more than 3 characters is not specified, so throw error.
             else if ((is_lowercase || is_uppercase) && letters >= 3)
             {
-                throw std::length_error("more than 3 letters inputted");
-                exit(0);
+                std::cout << "Error: exceeded 3 letters, exiting." << std::endl;
+                exit(1);
             }
         }
     }
 
-    // begin sort procedure
-    // if first char is greater than second char, swap
-    if (std::tolower(input_string[0]) > std::tolower(input_string[1]))
+    // Track which letters are capitalized using companion boolean array.
+    // Reduce all letters to lowercase.
+    bool capitalized_letter[3] = {false};
+    for (int i = 0; i < 3; ++i)
     {
-        char tmp = input_string[1];
-        input_string[1] = input_string[0];
-        input_string[0] = tmp;
-    }
-    // if second char is greater than third char, swap
-    if (std::tolower(input_string[1]) > std::tolower(input_string[2]))
-    {
-        char tmp = input_string[2];
-        input_string[2] = input_string[1];
-        input_string[1] = tmp;
-    }
-    // if (new) first char is greater than (new) second char, swap
-    if (std::tolower(input_string[0]) > std::tolower(input_string[1]))
-    {
-        char tmp = input_string[1];
-        input_string[1] = input_string[0];
-        input_string[0] = tmp;
+        if ('A' <= input_letters[i] && input_letters[i] <= 'Z')
+        {
+            input_letters[i] += 32;
+            capitalized_letter[i] = true;
+        }
     }
 
-    // print sorted letters to user
-    std::cout << input_string << std::endl;
+    // Begin sort procedure.
+    // If first char is greater than second char, swap.
+    if (input_letters[0] > input_letters[1])
+    {
+        char ctmp = input_letters[1];
+        input_letters[1] = input_letters[0];
+        input_letters[0] = ctmp;
+
+        bool btmp = capitalized_letter[1];
+        capitalized_letter[1] = capitalized_letter[0];
+        capitalized_letter[0] = btmp;
+    }
+    // If second char is greater than third char, swap.
+    if (input_letters[1] > input_letters[2])
+    {
+        char ctmp = input_letters[2];
+        input_letters[2] = input_letters[1];
+        input_letters[1] = ctmp;
+
+        bool btmp = capitalized_letter[2];
+        capitalized_letter[2] = capitalized_letter[1];
+        capitalized_letter[1] = btmp;
+    }
+    // If (new) first char is greater than (new) second char, swap.
+    if (input_letters[0] > input_letters[1])
+    {
+        char ctmp = input_letters[1];
+        input_letters[1] = input_letters[0];
+        input_letters[0] = ctmp;
+        
+        bool btmp = capitalized_letter[1];
+        capitalized_letter[1] = capitalized_letter[0];
+        capitalized_letter[0] = btmp;
+    }
+
+    // Return respective letters to uppercase.
+    for (int i = 0; i < 3; ++i)
+    {
+        if (capitalized_letter[i])
+        {
+            input_letters[i] -= 32;
+        }
+    }
+
+    // Print alphabetized letters to user.
+    std::cout << input_letters << std::endl;
     return 0;
 }

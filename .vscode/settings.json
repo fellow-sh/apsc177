@@ -48,5 +48,10 @@
     },
     "cSpell.enableFiletypes": [
         "!cpp"
+    ],
+    "cSpell.words": [
+        "delimeter",
+        "Pseudocode",
+        "whitespaces"
     ]
 }

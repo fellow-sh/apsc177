@@ -19,7 +19,7 @@ Here the pseudocode is written in **python-like** language for readability.
 
 ```python
 # initialize important variables
-input_string[3]
+input_chars[3]
 chars = 0
 
 # prompt user for input
@@ -33,13 +33,13 @@ while chars < 3:
     # get letters from line
     for chr in input_line:
         if chr_is_letter:
-            input_string.add(chr)
+            input_chars.add(chr)
 
             # count letters
             chars += 1
 
 # sort letters
-output_string = sorted(input_string)
+output_string = sorted(input_chars)
 
 # output sorted letters to user
 print(output_string)
@@ -55,10 +55,10 @@ Once we have all three letters, the loop is terminated and the program sorts the
 
 First, the initial variables must be declared:
 ```python
-input_string[3]
+input_chars[3]
 chars = 0
 ```
-The array `input_string[3]` will contain our three characters that the user will input, and `chars` will count the number of characters given by the user during the input loop.
+The array `input_chars[3]` will contain our three characters that the user will input, and `chars` will count the number of characters given by the user during the input loop.
 
 ## Input Loop
 
@@ -81,11 +81,11 @@ input_line = input(delimeter='\n')
 
 **Tip:** Reading the input from the user is the hardest part of this assignment. Not only must the program identify if the inputted characters are letters, but it must also handle *potential* whitespaces (i.e. spaces `' '`, tabs `'\t'`, or newlines (enter key) `'\n'`) and multi-character inputs. Therefore, the variable that stores the input line from the user cannot be of type `char`, but rather a data type that can store *multiple* `char`s. Then, this *string* of `char`s could iterated through and checked to see if they're letters. Handling whitespaces on the other hand will involve a "function" from `std::cin`. <!-- The stream extraction operation `std::cin >> foo` (`foo` is an informal stand-in for any variable) will stop reading the input at any whitespace (i.e. spaces `' '`, tabs `'\t'`, or newlines (enter key) `'\n'`). So, the user input `"a b"` to `std::cin` will -->
 
-From here, each line must be filtered for the desired letters. To do this, we need to created another loop that looks through each character in the inputted line and check if each character is a letter. If it is a letter, we add it to our `input_string` array.
+From here, each line must be filtered for the desired letters. To do this, we need to created another loop that looks through each character in the inputted line and check if each character is a letter. If it is a letter, we add it to our `input_chars` array.
 ```python
 for chr in input_line:
     if chr_is_letter:
-        input_string.add(chr)
+        input_chars.add(chr)
         chars += 1
 ```
 Keep in mind that `chars` is incremented for every letter found.
@@ -95,7 +95,7 @@ Once each character in the input line has been looked at, the input loop repeats
 ## Sorting the Letters
 
 ```python
-output_string = sorted(input_string)
+output_string = sorted(input_chars)
 ```
 
 You should implement a similar sorting procedure that was covered in Lab 1, but as specified by the assignment details, it should be non-complex and only involve if-statements.
