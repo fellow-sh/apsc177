@@ -98,6 +98,4 @@ Once each character in the input line has been looked at, the input loop repeats
 output_string = sorted(input_chars)
 ```
 
-You should implement a similar sorting procedure that was covered in Lab 1, but as specified by the assignment details, it should be non-complex and only involve if-statements.
-
-**Note:** Uppercase letters have different ASCII codes then lowercase letters. For example, `'B'` has an index of 65, whereas `'a'` has an index of 97, so the string `"aB"` will be sorted as `"Ba"`. Therefore, you must convert all letters to the same case before comparing them.
+You should implement a similar sorting procedure that was covered in Lab 1, but as specified by the assignment details, it should be non-complex and only involve if-statements. This part of the assignment is made easy since the letters need to be in ASCII order and not necessarily alphabetical.

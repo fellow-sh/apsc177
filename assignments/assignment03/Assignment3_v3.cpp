@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------------------//
 // APSC 177 Assignment 3                                                                 //
-// Date: 01-Feb-2023                                                                     //
+// Date: 02-Feb-2023                                                                     //
 // Name: Julian Joaquin                                                                  //
 // Student ID Number: 52754413                                                           //
-// Brief Desciption. This program takes a string of three characters and outputs the     //
-// same characters in alphabetical order. The particular coding style of this program    //
-// maximizes the use of available functions from the standard library that can be        //
-// called without including the standard files.                                          //
+// Brief Description: This program takes three inputted letters and outputs them in      //
+// alphabetical order, regardless of capitalization. This particular code maximizes the  //
+// use of available functions from the standard library that can be called without       //
+// including the standard files.                                                         //
 //---------------------------------------------------------------------------------------//
 #include <iostream>
 #include <string>
@@ -43,7 +43,6 @@ int main()
             else if (std::isalpha(input_line[i]) && letters >= 3)
             {
                 throw std::length_error("more than 3 letters inputted");
-                exit(0);
             }
         }
     }
@@ -67,5 +66,5 @@ int main()
     
     // Print sorted letters to user.
     std::cout << input_chars << std::endl;
-    return 0;
+    return(0);
 }
