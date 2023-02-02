@@ -1,3 +1,3 @@
 # My APSC 177 Material
 
-This is my personal repository for all code for APSC 177. I have made this a public repository because I know that seeing other people's work can be helpful for developing your own.
+This is my personal repository for all code for APSC 177. It contains most of my code for every assignment and lab in the course, alongside write-ups on pseudocode and flowcharts where I feel necessary.
