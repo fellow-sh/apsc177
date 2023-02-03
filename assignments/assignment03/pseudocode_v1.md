@@ -92,10 +92,15 @@ Keep in mind that `chars` is incremented for every letter found.
 
 Once each character in the input line has been looked at, the input loop repeats and asks for another input line from the user. As stated before, this input loop will terminate once we have 3 characters from the user.
 
-## Sorting the Letters
+## Outputting Ordered Letters
+
+There are actually 2 ways to approach this part of the program:
+1. Sort the characters and then output
+2. Output for each possible order of characters
+
+Given the assignment advices to only use if-statements,
 
 ```python
 output_string = sorted(input_chars)
 ```
 
-You should implement a similar sorting procedure that was covered in Lab 1, but as specified by the assignment details, it should be non-complex and only involve if-statements. This part of the assignment is made easy since the letters need to be in ASCII order and not necessarily alphabetical.

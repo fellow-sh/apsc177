@@ -28,7 +28,7 @@ int main()
     {
         // Retrieve an input line from the user.
         std::string input_line;
-        std::getline(std::cin, input_line, '\n');
+        std::getline(std::cin, input_line);
 
         // Iterate over input line to check if each character is a letter.
         for (int i = 0; i < input_line.length(); ++i)
