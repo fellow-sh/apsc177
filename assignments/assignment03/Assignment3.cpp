@@ -24,31 +24,31 @@ int main()
     while (letter3 == '\0')
     {
         // Retrieve an input line from the user.
-        char input_char;
-        std::cin >> input_char;
+        char input_line[256];
+        std::cin >> input_line;
 
         // Iterate over input line to check if each character is a letter.
-        bool is_lowercase = 'a' <= input_char && input_char <= 'z';
-        bool is_uppercase = 'A' <= input_char && input_char <= 'Z';
-        bool is_alpha = is_lowercase || is_uppercase;
+        for (int i = 0; i < input_line[i] != '\0'; ++i)
+        {
+            char input_char = input_line[i];
+            
+            bool is_lowercase = 'a' <= input_char && input_char <= 'z';
+            bool is_uppercase = 'A' <= input_char && input_char <= 'Z';
+            bool is_alpha = is_lowercase || is_uppercase;
 
-        bool is_whitespace = input_char == ' ' || input_char == '\t' || input_char == '\n';
-
-        if (letter3 != '\0')
-        {
-            // Behaviour for more than 3 characters is not specified, so throw error.
-            std::cout << "Error: exceeded 3 letters, exiting with status 1." << std::endl;
-            return 0;
-        }
-        if (!is_alpha && !is_whitespace)
-        {
-            // Behaviour for non-alpha characters is not specified, so throw error.
-            std::cout << "Error: entered a non-alpha character, exiting with status 1." << std::endl;
-            return 0;
-        }
-        // If character is a letter, add to `c`.
-        if (is_alpha)
-        {
+            if (letter3 != '\0')
+            {
+                // Behaviour for more than 3 characters is not specified, so throw error.
+                std::cout << "Error: exceeded 3 letters, exiting with status 1." << std::endl;
+                return 0;
+            }
+            if (!is_alpha)
+            {
+                // Behaviour for non-alpha characters is not specified, so throw error.
+                std::cout << "Error: entered a non-alpha character, exiting with status 1." << std::endl;
+                return 0;
+            }
+            // If character is a letter, add to `c`.
             if (letter1 == '\0')
             {
                 letter1 = input_char;

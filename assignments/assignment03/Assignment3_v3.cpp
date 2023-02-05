@@ -9,7 +9,6 @@
 // including the standard files. Wait, is this bad practice?                             //
 //---------------------------------------------------------------------------------------//
 #include <iostream>
-#include <string>
 
 // Since the sorting algorithm at this end only handles 3 values,
 // This value cannot be anything else then 3.
@@ -31,24 +30,28 @@ int main()
     while (letters < MAX_LETTERS)
     {
         // Retrieve an input line from the user.
-        char input_char;
-        std::cin >> input_char;
+        char input_line[256];
+        std::cin >> input_line;
 
         // Iterate over input line to check if each character is a letter.
-        // If character is a letter, add to `input_letters` and increment `letters`.
-        if (std::isalpha(input_char) && letters < MAX_LETTERS)
+        for (int i = 0; i < input_line[i] != '\0'; ++i)
         {
-            input_letters[letters] = input_char;
-            ++letters;
-        }
-        // Behaviour for more than 3 characters is not specified, so throw error.
-        else if (std::isalpha(input_char) && letters >= MAX_LETTERS)
-        {
-            throw std::length_error("more than 3 letters inputted");
-        }
-        else if (!std::isalpha(input_char) && !std::isspace(input_char))
-        {
-            throw std::invalid_argument("program expects whitespaces or letters");
+            char input_char = input_line[i];
+            // If character is a letter, add to `input_letters` and increment `letters`.
+            if (std::isalpha(input_char) && letters < MAX_LETTERS)
+            {
+                input_letters[letters] = input_char;
+                ++letters;
+            }
+            // Behaviour for more than 3 characters is not specified, so throw error.
+            else if (std::isalpha(input_char) && letters >= MAX_LETTERS)
+            {
+                throw std::length_error("more than 3 letters inputted");
+            }
+            else if (!std::isalpha(input_char) && !std::isspace(input_char))
+            {
+                throw std::invalid_argument("program expects whitespaces or letters");
+            }
         }
     }
 
@@ -71,5 +74,5 @@ int main()
     
     // Print sorted letters to user.
     std::cout << input_letters << std::endl;
-    return(0);
+    return 0;
 }
