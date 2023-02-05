@@ -94,13 +94,13 @@ Once each character in the input line has been looked at, the input loop repeats
 
 ## Outputting Ordered Letters
 
-There are actually 2 ways to approach this part of the program:
-1. Sort the characters and then output
-2. Output for each possible order of characters
-
-Given the assignment advices to only use if-statements,
-
 ```python
 output_string = sorted(input_chars)
 ```
+
+This line is just there for show. There are actually 2 ways to approach this part of the program:
+1. Sort the characters and then output
+2. Output for each possible order of characters
+
+Given the assignment advices to only use if-statements, you should probably use if-statements.
 

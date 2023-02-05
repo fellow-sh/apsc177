@@ -27,7 +27,7 @@ int main()
     {
         // Retrieve an input line from the user.
         std::string input_line;
-        std::getline(std::cin, input_line);
+        std::getline(std::cin, input_line, '\n');
 
         // Iterate over input line to check if each character is a letter.
         for (int i = 0; i < input_line.length(); ++i)
@@ -36,18 +36,25 @@ int main()
             bool is_uppercase = 'A' <= input_line[i] && input_line[i] <= 'Z';
             bool is_alpha = is_lowercase || is_uppercase;
 
-            // If character is a letter, add to `input_letters` and increment `letters`.
-            if (is_alpha && letters < 3)
+            bool is_whitespace = input_line[i] == ' ' || input_line[i] == '\t' || input_line[i] == '\n';
+
+            if (letters >= 3)
+            {
+                // Behaviour for more than 3 characters is not specified, so throw error.
+                std::cout << "Error: exceeded 3 letters, exiting with status 1." << std::endl;
+                return 0;
+            }
+            if (!is_alpha && !is_whitespace)
+            {
+                // Behaviour for non-alpha characters is not specified, so throw error.
+                std::cout << "Error: entered a non-alpha character, exiting with status 1." << std::endl;
+                return 0;
+            }
+            // If character is a letter, add to `c`.
+            if (is_alpha)
             {
                 input_letters[letters] = input_line[i];
                 ++letters;
-            }
-            // Behaviour for more than 3 characters is not specified, so throw error.
-            else if (is_alpha && letters >= 3)
-            {
-                std::cout << "Error: exceeded 3 letters, exiting with status 1." << std::endl;
-                //exit(1);
-                return(0);
             }
         }
     }

@@ -6,7 +6,7 @@
 // Brief Description: This program takes three inputted letters and outputs them in      //
 // alphabetical order, regardless of capitalization. This particular code maximizes the  //
 // use of available functions from the standard library that can be called without       //
-// including the standard files.                                                         //
+// including the standard files. Wait, is this bad practice?                             //
 //---------------------------------------------------------------------------------------//
 #include <iostream>
 #include <string>
@@ -28,7 +28,7 @@ int main()
     {
         // Retrieve an input line from the user.
         std::string input_line;
-        std::getline(std::cin, input_line);
+        std::getline(std::cin, input_line, '\n');
 
         // Iterate over input line to check if each character is a letter.
         for (int i = 0; i < input_line.length(); ++i)
@@ -43,6 +43,10 @@ int main()
             else if (std::isalpha(input_line[i]) && letters >= 3)
             {
                 throw std::length_error("more than 3 letters inputted");
+            }
+            else if (!std::isalpha(input_line[i]) && !std::isspace(input_line[i]))
+            {
+                throw std::invalid_argument("program expects whitespaces or letters");
             }
         }
     }
