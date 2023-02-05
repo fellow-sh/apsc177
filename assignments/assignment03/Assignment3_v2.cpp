@@ -13,7 +13,6 @@
 
 void char_bubble_sort(char[], int);
 char make_lowercase(char);
-bool is_whitespace(char);
 
 const int MAX_LETTERS = 3;
 
@@ -33,38 +32,35 @@ int main()
     while (letters < MAX_LETTERS)
     {
         // Retrieve an input line from the user.
-        std::string input_line;
-        std::getline(std::cin, input_line, '\n');
+        char input_char;
+        std::cin >> input_char;
 
         // Iterate over input line to check if each character is a letter.
-        for (int i = 0; i < input_line.length(); ++i)
-        {
-            bool is_lowercase = 'a' <= input_line[i] && input_line[i] <= 'z';
-            bool is_uppercase = 'A' <= input_line[i] && input_line[i] <= 'Z';
-            bool is_alpha = is_lowercase || is_uppercase;
+        bool is_lowercase = 'a' <= input_char && input_char <= 'z';
+        bool is_uppercase = 'A' <= input_char && input_char <= 'Z';
+        bool is_alpha = is_lowercase || is_uppercase;
 
-            if (letters >= MAX_LETTERS)
-            {
-                // Behaviour for more than 3 characters is not specified, so throw error.
-                std::cout << "Error: exceeded 3 letters,"
-                << " exiting with status 1." << std::endl;
-                return 0;
-            }
-            if (!is_alpha && !is_whitespace(input_line[i]))
-            {
-                // Behaviour for non-alpha characters is not specified, so throw error.
-                std::cout << "Error: entered a non-alpha character,"
-                << " exiting with status 1." << std::endl;
-                return 0;
-            }
-            // If character is a letter, add to `c`.
-            if (is_alpha)
-            {
-                input_letters[letters] = input_line[i];
-                ++letters;
-            }
-            // There are no operations for whitespaces.
+        if (letters >= MAX_LETTERS)
+        {
+            // Behaviour for more than 3 characters is not specified, so throw error.
+            std::cout << "Error: exceeded 3 letters,"
+            << " exiting with status 1." << std::endl;
+            return 0;
         }
+        if (!is_alpha)
+        {
+            // Behaviour for non-alpha characters is not specified, so throw error.
+            std::cout << "Error: entered a non-alpha character,"
+            << " exiting with status 1." << std::endl;
+            return 0;
+        }
+        // If character is a letter, add to `c`.
+        if (is_alpha)
+        {
+            input_letters[letters] = input_char;
+            ++letters;
+        }
+        // There are no operations for whitespaces.
     }
 
     char_bubble_sort(input_letters, MAX_LETTERS);
@@ -102,18 +98,4 @@ char make_lowercase(char c)
         return lower_c;
     }
     return c;
-}
-
-// Checks if character is a whitespace.
-bool is_whitespace(char c)
-{
-    char whitespaces[4] = {' ', '\t', '\n', '\r'};
-    for (char whitespace : whitespaces)
-    {
-        if (c == whitespace)
-        {
-            return true;
-        }
-    }
-    return false;
 }

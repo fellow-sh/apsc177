@@ -8,7 +8,6 @@
 // letters).                                                                             //
 //---------------------------------------------------------------------------------------//
 #include <iostream>
-#include <string>
 
 int main()
 {
@@ -26,36 +25,30 @@ int main()
     while (letters < 3)
     {
         // Retrieve an input line from the user.
-        std::string input_line;
-        std::getline(std::cin, input_line, '\n');
+        char input_char;
+        std::cin >> input_char;
 
-        // Iterate over input line to check if each character is a letter.
-        for (int i = 0; i < input_line.length(); ++i)
+        bool is_lowercase = 'a' <= input_char && input_char <= 'z';
+        bool is_uppercase = 'A' <= input_char && input_char <= 'Z';
+        bool is_alpha = is_lowercase || is_uppercase;
+
+        if (letters >= 3)
         {
-            bool is_lowercase = 'a' <= input_line[i] && input_line[i] <= 'z';
-            bool is_uppercase = 'A' <= input_line[i] && input_line[i] <= 'Z';
-            bool is_alpha = is_lowercase || is_uppercase;
-
-            bool is_whitespace = input_line[i] == ' ' || input_line[i] == '\t' || input_line[i] == '\n';
-
-            if (letters >= 3)
-            {
-                // Behaviour for more than 3 characters is not specified, so throw error.
-                std::cout << "Error: exceeded 3 letters, exiting with status 1." << std::endl;
-                return 0;
-            }
-            if (!is_alpha && !is_whitespace)
-            {
-                // Behaviour for non-alpha characters is not specified, so throw error.
-                std::cout << "Error: entered a non-alpha character, exiting with status 1." << std::endl;
-                return 0;
-            }
-            // If character is a letter, add to `c`.
-            if (is_alpha)
-            {
-                input_letters[letters] = input_line[i];
-                ++letters;
-            }
+            // Behaviour for more than 3 characters is not specified, so throw error.
+            std::cout << "Error: exceeded 3 letters, exiting with status 1." << std::endl;
+            return 0;
+        }
+        if (!is_alpha)
+        {
+            // Behaviour for non-alpha characters is not specified, so throw error.
+            std::cout << "Error: entered a non-alpha character, exiting with status 1." << std::endl;
+            return 0;
+        }
+        // If character is a letter, add to `c`.
+        if (is_alpha)
+        {
+            input_letters[letters] = input_char;
+            ++letters;
         }
     }
 
