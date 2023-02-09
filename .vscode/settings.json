@@ -51,10 +51,8 @@
         "ratio": "cpp",
         "sstream": "cpp"
     },
-    "cSpell.enableFiletypes": [
-        "!cpp"
-    ],
     "cSpell.words": [
+        "APSC",
         "delimeter",
         "Pseudocode",
         "whitespaces"
