@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------------------------//
 #include <iostream>
 
+const int TRACKS = 4;
 const int TRAIN_WARNING_THRESHOLD = 4;
 
 int main()
@@ -17,76 +18,44 @@ int main()
     int most_trains_index = -1;
 
     // Define variables for number of trains per track.
-    int track1_trains;
-    int track2_trains;
-    int track3_trains;
-    int track4_trains;
+    int track_trains[TRACKS];
 
     // Check which track has greatest number of trains while inputting.
     // Track has greatest number of trains is read with respect to track priority.
     // Behaviour for user inputting non-integer characters is undefined.
     // Behaviour for negative integers is undefined.
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < TRACKS; ++i)
     {
         // Prompt user for input and read number of trains.
-        int input_trains;
-        
         std::cout << "Enter the number of trains on track " << i + 1 << ". ";
-        std::cin >> input_trains;
+        std::cin >> track_trains[i];
 
-        switch (i)
-        {
-        case 0:
-            track1_trains = input_trains;
-            break;
-        case 1:
-            track2_trains = input_trains;
-            break;
-        case 2:
-            track3_trains = input_trains;
-            break;
-        case 3:
-            track4_trains = input_trains;
-            break;
-        }
         // If number of trains is the greater then previous maximum, replace.
-        if (input_trains >= most_trains)
+        if (track_trains[i] >= most_trains)
         {
             most_trains_index = i;
-            most_trains = input_trains;
+            most_trains = track_trains[i];
+        }
+        // Format output in case of bash here string input.
+        if (std::cin.peek() != '\n')
+        {
+            std::cout << '\n';
         }
     }
 
     // Output the number of trains per track.
     // Output is formatted while checking conditions.
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < TRACKS; ++i)
     {
-        int trains;
-        switch (i)
-        {
-        case 0:
-            trains = track1_trains;
-            break;
-        case 1:
-            trains = track2_trains;
-            break;
-        case 2:
-            trains = track3_trains;
-            break;
-        case 3:
-            trains = track4_trains;
-            break;
-        }
-
         std::cout << "Track " << i + 1 << " has ";
 
         // Output trains cleared and stopped if track has most trains.
         if (most_trains_index == i)
         {
-            std::cout << "1 train cleared and " << trains - 1 << " train(s) stopped.";
+            std::cout << "1 train cleared and " << track_trains[i] - 1 << " train(s) stopped.";
 
             // If number of trains exceeds threshold, ouput alert.
-            if (trains > TRAIN_WARNING_THRESHOLD)
+            if (track_trains[i] > TRAIN_WARNING_THRESHOLD)
             {
                 std::cout << " Track " << i + 1 << " alert!";
             }
@@ -94,9 +63,9 @@ int main()
         // Otherwise only output stopped trains.
         else
         {
-            std::cout << trains << " train(s) stopped.";
+            std::cout << track_trains[i] << " train(s) stopped.";
         }
-        std::cout << '\n';
+        std::cout << "\n";
     }
 
     // Flush stream.

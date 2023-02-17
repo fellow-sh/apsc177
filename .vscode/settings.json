@@ -53,8 +53,12 @@
     },
     "cSpell.words": [
         "APSC",
+        "bincoeff",
+        "binom",
         "delimeter",
+        "mord",
         "Pseudocode",
+        "scipy",
         "whitespaces"
     ]
 }

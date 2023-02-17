@@ -1,74 +1,76 @@
 //---------------------------------------------------------------------------------------//
 // APSC 177 - Lab Section L1B - LAB 3                                                    //
-// Date: 08-Feb-2023                                                                     //
+// Date: 11-Feb-2023                                                                     //
 // Name: Julian Joaquin                                                                  //
 // Student ID Number: 52754413                                                           //
 // Brief Description: This program is designed to indicate the number of trains stopped  //
-// or cleared at an LRT junction.                                                        //
+// or cleared at an LRT junction. I would recommend beginning students to use this       //
+// method.                                                                               //
 //---------------------------------------------------------------------------------------//
 #include <iostream>
 
-const int TRACKS = 4;
-const int TRAIN_WARNING_THRESHOLD = 4;
-
 int main()
 {
-    // Initialize field.
-    int most_trains = 0;
-    int most_trains_index = -1;
+    int track1;
+    int track2;
+    int track3;
+    int track4;
 
-    // Define variables for number of trains per track.
-    int track_trains[TRACKS];
+    std::cout << "Enter the number of trains on track 1. ";
+    std::cin >> track1;
+    std::cout << "Enter the number of trains on track 2. ";
+    std::cin >> track2;
+    std::cout << "Enter the number of trains on track 3. ";
+    std::cin >> track3;
+    std::cout << "Enter the number of trains on track 4. ";
+    std::cin >> track4;
 
-    // Check which track has greatest number of trains while inputting.
-    // Track has greatest number of trains is read with respect to track priority.
-    // Behaviour for user inputting non-integer characters is undefined.
-    // Behaviour for negative integers is undefined.
-    for (int i = 0; i < TRACKS; ++i)
+    if (track1 > track2 && track1 > track3 && track1 > track4)
     {
-        // Prompt user for input and read number of trains.
-        std::cout << "Enter the number of trains on track " << i + 1 << ". ";
-        std::cin >> track_trains[i];
-
-        // If number of trains is the greater then previous maximum, replace.
-        if (track_trains[i] >= most_trains)
+        std::cout << "Track 1 has 1 train cleared and " << track1 - 1 << " train(s) stopped.";
+        if (track1 > 4)
         {
-            most_trains_index = i;
-            most_trains = track_trains[i];
-        }
-        // Format output in case of bash here string input.
-        if (std::cin.peek() != '\n')
-        {
-            std::cout << '\n';
-        }
-    }
-
-    // Output the number of trains per track.
-    // Output is formatted while checking conditions.
-    for (int i = 0; i < TRACKS; ++i)
-    {
-        std::cout << "Track " << i + 1 << " has ";
-
-        // Output trains cleared and stopped if track has most trains.
-        if (most_trains_index == i)
-        {
-            std::cout << "1 train cleared and " << track_trains[i] - 1 << " train(s) stopped.";
-
-            // If number of trains exceeds threshold, ouput alert.
-            if (track_trains[i] > TRAIN_WARNING_THRESHOLD)
-            {
-                std::cout << " Track " << i + 1 << " alert!";
-            }
-        }
-        // Otherwise only output stopped trains.
-        else
-        {
-            std::cout << track_trains[i] << " train(s) stopped.";
+            std::cout << " Track 1 alert!";
         }
         std::cout << "\n";
+        std::cout << "Track 2 has " << track2 << " train(s) stopped.\n";
+        std::cout << "Track 3 has " << track3 << " train(s) stopped.\n";
+        std::cout << "Track 4 has " << track4 << " train(s) stopped." << std::endl;
     }
-
-    // Flush stream.
-    std::cout << std::endl;
+    if (track2 >= track1 && track2 > track3 && track2 > track4)
+    {
+        std::cout << "Track 1 has " << track2 << " train(s) stopped.\n";
+        std::cout << "Track 2 has 1 train cleared and " << track2 - 1 << " train(s) stopped.";
+        if (track2 > 4)
+        {
+            std::cout << " Track 2 alert!";
+        }
+        std::cout << "\n";
+        std::cout << "Track 3 has " << track3 << " train(s) stopped.\n";
+        std::cout << "Track 4 has " << track4 << " train(s) stopped." << std::endl;
+    }
+    if (track3 >= track1 && track3 >= track2 && track3 > track4)
+    {
+        std::cout << "Track 1 has " << track3 << " train(s) stopped.\n";
+        std::cout << "Track 2 has " << track3 << " train(s) stopped.\n";
+        std::cout << "Track 3 has 1 train cleared and " << track3 - 1 << " train(s) stopped.";
+        if (track3 > 4)
+        {
+            std::cout << " Track 3 alert!";
+        }
+        std::cout << "Track 4 has " << track4 << " train(s) stopped." << std::endl;
+    }
+    if (track4 >= track1 && track4 >= track2 && track4 >= track3)
+    {
+        std::cout << "Track 1 has " << track3 << " train(s) stopped.\n";
+        std::cout << "Track 2 has " << track2 << " train(s) stopped.\n";
+        std::cout << "Track 3 has " << track3 << " train(s) stopped.\n";
+        std::cout << "Track 4 has 1 train cleared and " << track4 - 1 << "train(s) stopped.";
+        if (track4 > 4)
+        {
+            std::cout << " Track 4 alert!";
+        }
+        std::cout << std::endl;
+    }
     return 0;
 }
