@@ -3,6 +3,8 @@ import time
 import math
 import sys
 import random
+import numpy as np
+from numpy.typing import NDArray
 from numpy import gcd, log2
 from scipy.special import comb
 
@@ -17,8 +19,8 @@ def trail_division(n: int) -> bool:
 
 
 def miller_rabin(n: int, k: int) -> bool:
-    assert n % 2 == 1
-    assert n > 2
+    if n < 3 or not n % 2:
+        return False
 
     test = n - 1
     d = -1
@@ -68,6 +70,28 @@ def LFT(n: int) -> bool:
     return True
 
 
+def sieve_test(n: int) -> bool:
+    if n < 3 or not n % 2:
+        return False
+    primes = sieve(n)
+    if primes[-1] == n:
+        return True
+    for p in primes:
+        if n % p == 0:
+            return False
+    return True
+
+
+def sieve(n: int) -> NDArray:
+    primes = np.ones(n-1)
+    for i in range(0, math.isqrt(n)):
+        if primes[i]:
+            for j in range((i+2)**2, n+1, i+2):
+                primes[j-2] = 0
+
+    return np.array([i+2 for i, j in enumerate(primes) if j != 0])
+
+
 def perfect_power(n: int) -> bool:
     for b in range(2, int(log2(n) + 1)):
         if n**(1 / b) % 1 == 0:
@@ -112,19 +136,22 @@ def factorial(n: int) -> int:
 
 
 def main():
-    test_number = 5303
-    checkpoint1 = time.time()
-    print(miller_rabin(test_number, VERY_LARGE_NUMBER))
+    test_number = 504671
+    if test_number < 100000:
+        checkpoint1 = time.time()
+        print(miller_rabin(test_number, VERY_LARGE_NUMBER))
     checkpoint2 = time.time()
     print(trail_division(test_number))
     checkpoint3 = time.time()
-    print(LFT(test_number))
+    print(sieve_test(test_number))
     checkpoint4 = time.time()
 
     unit = 's'# if sys.platform == 'win32' else 'ms'
-    print(f'Miller Rabin:   {checkpoint2 - checkpoint1} {unit}')
+    if test_number < 100000:
+        print(f'Miller Rabin:   {checkpoint2 - checkpoint1} {unit}')
     print(f'Trial Division: {checkpoint3 - checkpoint2} {unit}')
-    print(f'LFT:            {checkpoint4 - checkpoint3} {unit}')
+    print(f'SoE:            {checkpoint4 - checkpoint3} {unit}')
+    
 
 if __name__ == '__main__':
     main()
